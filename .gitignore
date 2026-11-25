@@ -1,0 +1,42 @@
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+
+# Java / Maven (PassTrack_backend)
+PassTrack_backend/target/
+*.jar
+*.war
+*.ear
+*.class
+*.log
+hs_err_pid*
+
+# Node / Vite (PassTrack_frontend)
+node_modules/
+PassTrack_frontend/node_modules/
+PassTrack_frontend/dist/
+PassTrack_frontend/dist-ssr/
+*.local
+
+# Uploads / local storage
+uploads/
+PassTrack_backend/uploads/
+
+# IDEs & Editors
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
