@@ -80,7 +80,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Implementar en `UsuarioController` los endpoints REST `POST /api/usuarios`, `GET /api/usuarios`, `GET /api/usuarios/{id}` y `DELETE /api/usuarios/{id}`, restringiendo cada operación exclusivamente al rol `DIRECTOR` mediante `@PreAuthorize("hasRole('DIRECTOR')")`. El controlador únicamente recibe y responde Java Records e invoca a `UsuarioService`.
   - *Criterio de Aceptación:* Peticiones autenticadas como `DIRECTOR` responden `201 Created` / `200 OK`; peticiones realizadas por `DOCENTE` o `ALUMNO` son bloqueadas con `403 Forbidden` (`UsuarioControllerTest#crearUsuario_SinRolDirector_Retorna403`); `check.sh` pasa en verde.
 
-- [] **PASS-16: Desarrollar DTOs, Servicio y Controlador para Grupos e Inscripciones**
+- [x] **PASS-16: Desarrollar DTOs, Servicio y Controlador para Grupos e Inscripciones**
   - *Descripción:* Crear los DTOs `GrupoCreateRecord`, `GrupoResponseRecord` e `InscripcionCreateRecord`. Desarrollar `GrupoService` (validando existencia del docente titular y unicidad de clave de grupo) y `GrupoController` protegido con `@PreAuthorize("hasRole('DIRECTOR')")`, manteniendo el flujo estricto Controller -> Service -> Repository.
   - *Criterio de Aceptación:* Impide asociar docentes inactivos o inexistentes (`400 Bad Request`); peticiones de usuarios sin rol `DIRECTOR` devuelven `403 Forbidden`; pruebas de integración con `MockMvc` pasan en verde.
 
