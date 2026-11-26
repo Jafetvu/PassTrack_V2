@@ -64,7 +64,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear `src/context/AuthContext.jsx` y su hook personalizado `useAuth`, proveyendo de manera reactiva el usuario autenticado, token, rol y métodos `login` / `logout`. Decodificar los claims del token en el montaje inicial para rehidratar la sesión de forma transparente.
   - *Criterio de Aceptación:* El estado de sesión se propaga a los componentes sin *prop drilling*; el estado persiste ante recargas del navegador; `logout` destruye el token en almacenamiento local y restablece el contexto a valores nulos.
 
-- [] **PASS-13: Desarrollar módulo de Login con componentes Smart/Dumb en src/features/auth/**
+- [x] **PASS-13: Desarrollar módulo de Login con componentes Smart/Dumb en src/features/auth/**
   - *Descripción:* Estructurar la feature `src/features/auth/` implementando el componente contenedor inteligente `LoginContainer.jsx` (gestión de estado de formulario, invocación del servicio de autenticación y redirección condicionada por rol) y el componente presentacional tonto `LoginForm.jsx` (renderizado puro de inputs, botones y alertas visuales recibidas por props).
   - *Criterio de Aceptación:* Autenticación exitosa redirige al dashboard correspondiente (`DIRECTOR`, `DOCENTE`, `ALUMNO`); credenciales incorrectas despliegan mensaje de error visual sin recargar la página; `npm run lint` pasa sin advertencias.
 
