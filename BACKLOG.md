@@ -88,7 +88,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Construir en `src/features/usuarios/` el componente inteligente `UsuariosAdminContainer.jsx` (estado local, consumo de API vía Axios, filtrado por rol y modal de confirmación) y los componentes tontos `TablaUsuarios.jsx` y `ModalUsuarioForm.jsx` (encargados puramente de la presentación y emisión de eventos mediante props).
   - *Criterio de Aceptación:* El Director puede crear, filtrar y dar de baja lógica a docentes y alumnos; validación en formulario cliente antes del envío; rutas protegidas redirigen fuera del módulo a usuarios con roles no autorizados.
 
-- [] **PASS-18: Desarrollar módulo de gestión de grupos e inscripciones en src/features/grupos/**
+- [x] **PASS-18: Desarrollar módulo de gestión de grupos e inscripciones en src/features/grupos/**
   - *Descripción:* Construir en `src/features/grupos/` el componente contenedor `GruposContainer.jsx` (gestión de asignación de docentes titulares e inscripción de alumnos en grupos) y los componentes presentacionales `ListaGruposCard.jsx` y `AsignarAlumnoModal.jsx` desacoplados de llamadas a la red.
   - *Criterio de Aceptación:* Permite crear grupos y matricular alumnos visualizando la lista actualizada en tiempo real; validación visual de formularios; `npm run lint` y `npm run build` pasan sin incidencias.
 
