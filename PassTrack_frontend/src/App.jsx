@@ -5,6 +5,7 @@ import RoleDashboardPlaceholder from './components/RoleDashboardPlaceholder';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { getHomeRouteByRole } from './context/roleRoutes';
 import LoginContainer from './features/auth/LoginContainer';
+import GruposContainer from './features/grupos/GruposContainer';
 import UsuariosAdminContainer from './features/usuarios/UsuariosAdminContainer';
 
 function RootRedirect() {
@@ -28,15 +29,7 @@ export default function App() {
           >
             <Route index element={<Navigate to="/director/usuarios" replace />} />
             <Route path="usuarios" element={<UsuariosAdminContainer />} />
-            <Route
-              path="grupos"
-              element={
-                <section className="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
-                  <h1 className="text-2xl font-bold text-slate-900">Gestión de Grupos</h1>
-                  <p className="mt-1 text-sm text-slate-600">Módulo en construcción.</p>
-                </section>
-              }
-            />
+            <Route path="grupos" element={<GruposContainer />} />
           </Route>
           <Route
             path="/docente/*"
