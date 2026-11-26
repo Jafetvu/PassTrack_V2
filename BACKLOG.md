@@ -52,7 +52,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Implementar `JwtService` (firma y validación HMAC-SHA256 con claims `sub`, `userId`, `rol` y expiración en 8 horas / `NFR-01`) y `JwtAuthenticationFilter` en `security/` extendiendo `OncePerRequestFilter` (Chain of Responsibility) para poblar el `SecurityContextHolder`. Configurar `SecurityFilterChain` en modo `STATELESS` habilitando `@EnableMethodSecurity`.
   - *Criterio de Aceptación:* Cualquier petición a `/api/**` sin token Bearer válido responde `401 Unauthorized` (excepto `/api/auth/login` y `/actuator/health`); tokens expirados o firmas manipuladas son rechazados de inmediato.
 
-- [] **PASS-10: Implementar endpoint de Login con DTOs inmutables (Java Records) en Controller y Service**
+- [x] **PASS-10: Implementar endpoint de Login con DTOs inmutables (Java Records) en Controller y Service**
   - *Descripción:* Definir los DTOs inmutables `LoginRequestRecord` y `AuthResponseRecord` con Java Records en `dto/auth/`. En `AuthService`, validar credenciales con `AuthenticationManager` y `BCryptPasswordEncoder`. En `AuthController` (`@RestController`), exponer `POST /api/auth/login` respetando el flujo estricto Multicapa (Controller invoca Service).
   - *Criterio de Aceptación:* Petición con credenciales correctas retorna `200 OK` con JWT y rol del usuario sin exponer `passwordHash`; credenciales incorrectas devuelven `401 Unauthorized`; pruebas unitarias con `MockMvc` pasan en verde.
 
