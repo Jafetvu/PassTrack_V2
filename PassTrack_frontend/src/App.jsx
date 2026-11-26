@@ -1,9 +1,11 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import AppShellLayout from './components/AppShellLayout';
 import DirectorLayout from './components/DirectorLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import RoleDashboardPlaceholder from './components/RoleDashboardPlaceholder';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { getHomeRouteByRole } from './context/roleRoutes';
+import PaseListaContainer from './features/asistencias/PaseListaContainer';
 import LoginContainer from './features/auth/LoginContainer';
 import GruposContainer from './features/grupos/GruposContainer';
 import UsuariosAdminContainer from './features/usuarios/UsuariosAdminContainer';
@@ -35,10 +37,9 @@ export default function App() {
             path="/docente/*"
             element={
               <ProtectedRoute allowedRoles={['DOCENTE']}>
-                <RoleDashboardPlaceholder
-                  title="Panel Docente"
-                  subtitle="Consulta de grupos asignados y pase de lista del día."
-                />
+                <AppShellLayout>
+                  <PaseListaContainer />
+                </AppShellLayout>
               </ProtectedRoute>
             }
           />
