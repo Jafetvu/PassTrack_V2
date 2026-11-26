@@ -8,23 +8,23 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 1: Cimientos y DevOps Inicial
 
-- [] **PASS-01: Configurar el script sensor unificado scripts/check.sh para validaciones locales y CI/CD**
+- [x] **PASS-01: Configurar el script sensor unificado scripts/check.sh para validaciones locales y CI/CD**
   - *Descripción:* Crear el script ejecutable `scripts/check.sh` que actúa como sensor bloqueante del monorepo, ejecutando secuencialmente `./mvnw test -B` en `PassTrack_backend` y `npm run lint && npm run build` en `PassTrack_frontend`.
   - *Criterio de Aceptación:* El script corre con `set -e`, aborta el flujo ante cualquier fallo en backend o frontend, y finaliza con código de salida `0` cuando ambas suites de validación pasan en verde.
 
-- [] **PASS-02: Definir el entorno multi-contenedor con Docker Compose (docker-compose.yml)**
+- [x] **PASS-02: Definir el entorno multi-contenedor con Docker Compose (docker-compose.yml)**
   - *Descripción:* Configurar la orquestación en `docker-compose.yml` para los 3 contenedores aislados: `db` (`mysql:8.0`), `PassTrack_backend` (Spring Boot 3 en JRE 21) y `PassTrack_frontend` (Nginx + React SPA), unidos por la red bridge privada `passtrack_net` y parametrizados mediante `.env.example`.
   - *Criterio de Aceptación:* `docker compose up -d` inicializa los servicios; el contenedor `db` cuenta con `healthcheck` funcional (`mysqladmin ping`) y el puerto 3306 no queda expuesto públicamente al host.
 
-- [] **PASS-03: Crear Dockerfile multi-stage optimizado para PassTrack_backend**
+- [x] **PASS-03: Crear Dockerfile multi-stage optimizado para PassTrack_backend**
   - *Descripción:* Configurar `PassTrack_backend/Dockerfile` en dos etapas: etapa 1 de compilación con Maven 3.9 y Eclipse Temurin JDK 21, y etapa 2 ligera de ejecución con Eclipse Temurin JRE 21 Alpine, ejecutando la aplicación con un usuario sin privilegios root sobre el puerto interno 8080.
   - *Criterio de Aceptación:* La imagen generada pesa menos de 300 MB, excluye código fuente o utilidades de compilación, y arranca la API Spring Boot de forma limpia mediante `java -jar app.jar`.
 
-- [] **PASS-04: Crear Dockerfile multi-stage y proxy inverso Nginx para PassTrack_frontend**
+- [x] **PASS-04: Crear Dockerfile multi-stage y proxy inverso Nginx para PassTrack_frontend**
   - *Descripción:* Configurar `PassTrack_frontend/Dockerfile` (Node 20 Alpine para el build de Vite y Nginx 1.25 Alpine para el servidor web) junto con `PassTrack_frontend/nginx.conf` configurado como proxy inverso para redirigir `/api/*` hacia `http://PassTrack_backend:8080` y servir el SPA con fallback a `index.html`.
   - *Criterio de Aceptación:* El contenedor responde en el puerto 80, resuelve rutas SPA sin error 404 ante recargas de página y redirige el tráfico de `/api/*` al backend eliminando problemas de CORS en producción.
 
-- [] **PASS-05: Diseñar el pipeline declarativo CI/CD en Jenkinsfile con trigger por Webhook**
+- [x] **PASS-05: Diseñar el pipeline declarativo CI/CD en Jenkinsfile con trigger por Webhook**
   - *Descripción:* Crear el archivo `Jenkinsfile` con etapas de `Checkout`, `Sensor Validation` (ejecutando `./scripts/check.sh`), `Build Docker Images` y `Deploy Containers`, integrando inyección de credenciales seguras (`DB_PASSWORD`, `JWT_SECRET`) y disparo automático por GitHub Webhook en `main`.
   - *Criterio de Aceptación:* Un `git push` a `main` dispara automáticamente el pipeline; si `check.sh` falla, el build se marca como `FAILURE` sin sustituir los contenedores en ejecución; el ciclo total completa en menos de 4 minutos.
 
