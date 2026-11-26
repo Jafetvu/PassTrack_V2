@@ -34,7 +34,13 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker compose build'
+                withCredentials([
+                    string(credentialsId: 'passtrack-db-password', variable: 'MYSQL_PASSWORD'),
+                    string(credentialsId: 'passtrack-db-root-password', variable: 'MYSQL_ROOT_PASSWORD'),
+                    string(credentialsId: 'passtrack-jwt-secret', variable: 'JWT_SECRET')
+                ]) {
+                    sh 'docker compose build'
+                }
             }
         }
 
@@ -43,7 +49,13 @@ pipeline {
                 branch 'prod'
             }
             steps {
-                sh 'docker compose up -d --remove-orphans'
+                withCredentials([
+                    string(credentialsId: 'passtrack-db-password', variable: 'MYSQL_PASSWORD'),
+                    string(credentialsId: 'passtrack-db-root-password', variable: 'MYSQL_ROOT_PASSWORD'),
+                    string(credentialsId: 'passtrack-jwt-secret', variable: 'JWT_SECRET')
+                ]) {
+                    sh 'docker compose up -d --remove-orphans'
+                }
             }
         }
     }
