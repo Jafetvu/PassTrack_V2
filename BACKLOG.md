@@ -40,7 +40,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear las clases `@Entity` en el paquete `com.passtrack.api.model` (`Usuario`, `Grupo`, `Inscripcion`, `Asistencia`, `Justificante`), definiendo relaciones `@ManyToOne`, `@OneToMany`, `@OneToOne`, enumeraciones (`Rol`, `EstadoAsistencia`, `EstadoJustificante`) y el atributo booleano `activo` para borrado lógico (`M-03`).
   - *Criterio de Aceptación:* El mapeo ORM es validado mediante pruebas de persistencia; el campo `passwordHash` no se expone en serializaciones; la suite de `check.sh` compila sin advertencias de Hibernate.
 
-- [] **PASS-08: Implementar repositorios Spring Data JPA en la capa Repositorio (repository/)**
+- [x] **PASS-08: Implementar repositorios Spring Data JPA en la capa Repositorio (repository/)**
   - *Descripción:* Desarrollar las interfaces que extienden `JpaRepository` en `com.passtrack.api.repository` (`UsuarioRepository`, `GrupoRepository`, `InscripcionRepository`, `AsistenciaRepository`, `JustificanteRepository`), aplicando el Repository Pattern con métodos de consulta derivados (`findByEmail`, `findByDocenteIdAndActivoTrue`, `findByGrupoIdAndFecha`).
   - *Criterio de Aceptación:* Pruebas de integración con `@DataJpaTest` validando consultas personalizadas, filtrado de borrado lógico y búsqueda por clave compuesta única sin uso de SQL nativo vulnerable.
 
