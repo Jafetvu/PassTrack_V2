@@ -96,7 +96,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 5: Fase 2 - Operación de Pase de Lista
 
-- [] **PASS-19: Implementar DTOs inmutables para pase de lista y resúmenes de asistencia**
+- [x] **PASS-19: Implementar DTOs inmutables para pase de lista y resúmenes de asistencia**
   - *Descripción:* Crear los Java Records en `dto/asistencia/`: `PaseListaItemRecord` (`alumnoId`, `estado`), `RegistroAsistenciaBulkRecord` (`fecha`, `List<PaseListaItemRecord> lista`), `AsistenciaResponseRecord` y `ResumenAsistenciaAlumnoRecord` (porcentajes, total de faltas, retardos y justificados).
   - *Criterio de Aceptación:* Los Java Records garantizan inmutabilidad absoluta; validan restricciones `@NotNull` en sus campos; ninguna entidad `@Entity` de persistencia es expuesta en estos contratos.
 
