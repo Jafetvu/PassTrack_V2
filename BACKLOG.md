@@ -48,7 +48,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 3: Seguridad y Autenticación
 
-- [] **PASS-09: Configurar la cadena de seguridad y utilidades criptográficas JWT en Backend**
+- [x] **PASS-09: Configurar la cadena de seguridad y utilidades criptográficas JWT en Backend**
   - *Descripción:* Implementar `JwtService` (firma y validación HMAC-SHA256 con claims `sub`, `userId`, `rol` y expiración en 8 horas / `NFR-01`) y `JwtAuthenticationFilter` en `security/` extendiendo `OncePerRequestFilter` (Chain of Responsibility) para poblar el `SecurityContextHolder`. Configurar `SecurityFilterChain` en modo `STATELESS` habilitando `@EnableMethodSecurity`.
   - *Criterio de Aceptación:* Cualquier petición a `/api/**` sin token Bearer válido responde `401 Unauthorized` (excepto `/api/auth/login` y `/actuator/health`); tokens expirados o firmas manipuladas son rechazados de inmediato.
 
