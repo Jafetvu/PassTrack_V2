@@ -32,7 +32,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 2: Base de Datos y Core Backend
 
-- [] **PASS-06: Crear script de migración inicial init.sql con restricciones de integridad**
+- [x] **PASS-06: Crear script de migración inicial init.sql con restricciones de integridad**
   - *Descripción:* Diseñar el script SQL en `PassTrack_backend/src/main/resources/schema.sql` (y montaje para `db` en `/docker-entrypoint-initdb.d/init.sql`) con las tablas `usuario`, `grupo`, `inscripcion`, `asistencia` y `justificante`, definiendo índices, llaves foráneas y la restricción `UNIQUE (alumno_id, grupo_id, fecha)`.
   - *Criterio de Aceptación:* El script se ejecuta limpiamente en MySQL 8.0, impide duplicados de asistencias concurrentes a nivel de motor relacional (`M-01`) y maneja marcas de tiempo en formato UTC (`M-02`).
 
