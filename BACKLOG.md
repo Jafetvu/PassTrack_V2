@@ -76,7 +76,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear los DTOs `UsuarioCreateRecord`, `UsuarioResponseRecord` y `UsuarioUpdateRecord` en `dto/usuario/`. En `UsuarioService`, implementar la lógica de negocio para crear usuarios cifrando contraseñas con `BCryptPasswordEncoder`, listar usuarios activos con paginación y realizar borrado lógico cambiando el flag `activo` a `false`.
   - *Criterio de Aceptación:* Ningún DTO expone `passwordHash`; intentos de registro con email duplicado lanzan excepción de conflicto (`409 Conflict`); el borrado lógico no borra registros físicamente (`M-03`); pruebas unitarias en `UsuarioServiceTest` en verde.
 
-- [] **PASS-15: Desarrollar UsuarioController con autorización RBAC estricta (@PreAuthorize)**
+- [x] **PASS-15: Desarrollar UsuarioController con autorización RBAC estricta (@PreAuthorize)**
   - *Descripción:* Implementar en `UsuarioController` los endpoints REST `POST /api/usuarios`, `GET /api/usuarios`, `GET /api/usuarios/{id}` y `DELETE /api/usuarios/{id}`, restringiendo cada operación exclusivamente al rol `DIRECTOR` mediante `@PreAuthorize("hasRole('DIRECTOR')")`. El controlador únicamente recibe y responde Java Records e invoca a `UsuarioService`.
   - *Criterio de Aceptación:* Peticiones autenticadas como `DIRECTOR` responden `201 Created` / `200 OK`; peticiones realizadas por `DOCENTE` o `ALUMNO` son bloqueadas con `403 Forbidden` (`UsuarioControllerTest#crearUsuario_SinRolDirector_Retorna403`); `check.sh` pasa en verde.
 
