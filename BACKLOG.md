@@ -104,7 +104,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Desarrollar en `AsistenciaService` la lógica de pase de lista bajo `@Transactional`: verificar que el docente autenticado sea el titular asignado al grupo en la base de datos (validación de Ownership), validar que `fecha.equals(LocalDate.now())` (`D-05`), y comprobar que no exista pase previo en la fecha actual (lanzando `409 Conflict` si ya existe).
   - *Criterio de Aceptación:* Retorna `403 Forbidden` si un docente intenta pasar lista en un grupo ajeno (`H-02`); retorna `400 Bad Request` si la fecha difiere del día en curso; retorna `409 Conflict` ante duplicidad; rollback atómico total ante fallo (`NFR-02`).
 
-- [] **PASS-21: Implementar AsistenciaController para registro docente y consulta por alumno**
+- [x] **PASS-21: Implementar AsistenciaController para registro docente y consulta por alumno**
   - *Descripción:* Crear los endpoints REST en `AsistenciaController`: `POST /api/asistencias/grupo/{id}` con `@PreAuthorize("hasRole('DOCENTE')")`, `GET /api/asistencias/grupo/{id}/hoy`, y `GET /api/asistencias/mis-asistencias` con `@PreAuthorize("hasRole('ALUMNO')")` asegurando que el servicio filtre estrictamente por el `userId` autenticado.
   - *Criterio de Aceptación:* Pruebas unitarias en `AsistenciaControllerTest`: docente titular registra asistencia obteniendo `201 Created` en menos de 500 ms; docente no titular recibe `403 Forbidden`; alumno obtiene solo sus registros propios; `check.sh` pasa en verde.
 
