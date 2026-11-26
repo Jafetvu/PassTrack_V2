@@ -84,7 +84,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear los DTOs `GrupoCreateRecord`, `GrupoResponseRecord` e `InscripcionCreateRecord`. Desarrollar `GrupoService` (validando existencia del docente titular y unicidad de clave de grupo) y `GrupoController` protegido con `@PreAuthorize("hasRole('DIRECTOR')")`, manteniendo el flujo estricto Controller -> Service -> Repository.
   - *Criterio de Aceptación:* Impide asociar docentes inactivos o inexistentes (`400 Bad Request`); peticiones de usuarios sin rol `DIRECTOR` devuelven `403 Forbidden`; pruebas de integración con `MockMvc` pasan en verde.
 
-- [] **PASS-17: Desarrollar módulo de administración de usuarios en src/features/usuarios/**
+- [x] **PASS-17: Desarrollar módulo de administración de usuarios en src/features/usuarios/**
   - *Descripción:* Construir en `src/features/usuarios/` el componente inteligente `UsuariosAdminContainer.jsx` (estado local, consumo de API vía Axios, filtrado por rol y modal de confirmación) y los componentes tontos `TablaUsuarios.jsx` y `ModalUsuarioForm.jsx` (encargados puramente de la presentación y emisión de eventos mediante props).
   - *Criterio de Aceptación:* El Director puede crear, filtrar y dar de baja lógica a docentes y alumnos; validación en formulario cliente antes del envío; rutas protegidas redirigen fuera del módulo a usuarios con roles no autorizados.
 
