@@ -48,23 +48,23 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 3: Seguridad y Autenticación
 
-- [] **PASS-09: Configurar la cadena de seguridad y utilidades criptográficas JWT en Backend**
+- [x] **PASS-09: Configurar la cadena de seguridad y utilidades criptográficas JWT en Backend**
   - *Descripción:* Implementar `JwtService` (firma y validación HMAC-SHA256 con claims `sub`, `userId`, `rol` y expiración en 8 horas / `NFR-01`) y `JwtAuthenticationFilter` en `security/` extendiendo `OncePerRequestFilter` (Chain of Responsibility) para poblar el `SecurityContextHolder`. Configurar `SecurityFilterChain` en modo `STATELESS` habilitando `@EnableMethodSecurity`.
   - *Criterio de Aceptación:* Cualquier petición a `/api/**` sin token Bearer válido responde `401 Unauthorized` (excepto `/api/auth/login` y `/actuator/health`); tokens expirados o firmas manipuladas son rechazados de inmediato.
 
-- [] **PASS-10: Implementar endpoint de Login con DTOs inmutables (Java Records) en Controller y Service**
+- [x] **PASS-10: Implementar endpoint de Login con DTOs inmutables (Java Records) en Controller y Service**
   - *Descripción:* Definir los DTOs inmutables `LoginRequestRecord` y `AuthResponseRecord` con Java Records en `dto/auth/`. En `AuthService`, validar credenciales con `AuthenticationManager` y `BCryptPasswordEncoder`. En `AuthController` (`@RestController`), exponer `POST /api/auth/login` respetando el flujo estricto Multicapa (Controller invoca Service).
   - *Criterio de Aceptación:* Petición con credenciales correctas retorna `200 OK` con JWT y rol del usuario sin exponer `passwordHash`; credenciales incorrectas devuelven `401 Unauthorized`; pruebas unitarias con `MockMvc` pasan en verde.
 
-- [] **PASS-11: Configurar cliente HTTP Axios con Interceptor Pattern en Frontend**
+- [x] **PASS-11: Configurar cliente HTTP Axios con Interceptor Pattern en Frontend**
   - *Descripción:* Crear la instancia centralizada en `PassTrack_frontend/src/api/axiosClient.js`, implementando un interceptor de solicitud para adjuntar automáticamente el encabezado `Authorization: Bearer <token>` y un interceptor de respuesta para interceptar errores `401` y `403`, limpiando el estado de sesión y redirigiendo a la ruta `/login`.
   - *Criterio de Aceptación:* Toda petición HTTP originada en la aplicación incluye el token JWT activo; ante una respuesta `401`, la sesión local se purga y el navegador navega a `/login` sin generar excepciones no capturadas.
 
-- [] **PASS-12: Implementar estado global de autenticación con Provider Pattern (AuthContext) en Frontend**
+- [x] **PASS-12: Implementar estado global de autenticación con Provider Pattern (AuthContext) en Frontend**
   - *Descripción:* Crear `src/context/AuthContext.jsx` y su hook personalizado `useAuth`, proveyendo de manera reactiva el usuario autenticado, token, rol y métodos `login` / `logout`. Decodificar los claims del token en el montaje inicial para rehidratar la sesión de forma transparente.
   - *Criterio de Aceptación:* El estado de sesión se propaga a los componentes sin *prop drilling*; el estado persiste ante recargas del navegador; `logout` destruye el token en almacenamiento local y restablece el contexto a valores nulos.
 
-- [] **PASS-13: Desarrollar módulo de Login con componentes Smart/Dumb en src/features/auth/**
+- [x] **PASS-13: Desarrollar módulo de Login con componentes Smart/Dumb en src/features/auth/**
   - *Descripción:* Estructurar la feature `src/features/auth/` implementando el componente contenedor inteligente `LoginContainer.jsx` (gestión de estado de formulario, invocación del servicio de autenticación y redirección condicionada por rol) y el componente presentacional tonto `LoginForm.jsx` (renderizado puro de inputs, botones y alertas visuales recibidas por props).
   - *Criterio de Aceptación:* Autenticación exitosa redirige al dashboard correspondiente (`DIRECTOR`, `DOCENTE`, `ALUMNO`); credenciales incorrectas despliegan mensaje de error visual sin recargar la página; `npm run lint` pasa sin advertencias.
 
