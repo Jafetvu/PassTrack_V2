@@ -1,9 +1,12 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import DirectorLayout from './components/DirectorLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import RoleDashboardPlaceholder from './components/RoleDashboardPlaceholder';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { getHomeRouteByRole } from './context/roleRoutes';
 import LoginContainer from './features/auth/LoginContainer';
+import GruposContainer from './features/grupos/GruposContainer';
+import UsuariosAdminContainer from './features/usuarios/UsuariosAdminContainer';
 
 function RootRedirect() {
   const { isAuthenticated, rol } = useAuth();
@@ -17,16 +20,17 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<LoginContainer />} />
           <Route
-            path="/director/*"
+            path="/director"
             element={
               <ProtectedRoute allowedRoles={['DIRECTOR']}>
-                <RoleDashboardPlaceholder
-                  title="Panel de Dirección"
-                  subtitle="Administración de usuarios, grupos y dictamen de justificantes."
-                />
+                <DirectorLayout />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<Navigate to="/director/usuarios" replace />} />
+            <Route path="usuarios" element={<UsuariosAdminContainer />} />
+            <Route path="grupos" element={<GruposContainer />} />
+          </Route>
           <Route
             path="/docente/*"
             element={

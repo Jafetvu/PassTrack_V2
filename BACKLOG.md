@@ -72,23 +72,23 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 4: Fase 1 - Gestión de Usuarios y Grupos
 
-- [] **PASS-14: Implementar DTOs inmutables (Java Records) y Servicio de Usuarios con cifrado BCrypt**
+- [x] **PASS-14: Implementar DTOs inmutables (Java Records) y Servicio de Usuarios con cifrado BCrypt**
   - *Descripción:* Crear los DTOs `UsuarioCreateRecord`, `UsuarioResponseRecord` y `UsuarioUpdateRecord` en `dto/usuario/`. En `UsuarioService`, implementar la lógica de negocio para crear usuarios cifrando contraseñas con `BCryptPasswordEncoder`, listar usuarios activos con paginación y realizar borrado lógico cambiando el flag `activo` a `false`.
   - *Criterio de Aceptación:* Ningún DTO expone `passwordHash`; intentos de registro con email duplicado lanzan excepción de conflicto (`409 Conflict`); el borrado lógico no borra registros físicamente (`M-03`); pruebas unitarias en `UsuarioServiceTest` en verde.
 
-- [] **PASS-15: Desarrollar UsuarioController con autorización RBAC estricta (@PreAuthorize)**
+- [x] **PASS-15: Desarrollar UsuarioController con autorización RBAC estricta (@PreAuthorize)**
   - *Descripción:* Implementar en `UsuarioController` los endpoints REST `POST /api/usuarios`, `GET /api/usuarios`, `GET /api/usuarios/{id}` y `DELETE /api/usuarios/{id}`, restringiendo cada operación exclusivamente al rol `DIRECTOR` mediante `@PreAuthorize("hasRole('DIRECTOR')")`. El controlador únicamente recibe y responde Java Records e invoca a `UsuarioService`.
   - *Criterio de Aceptación:* Peticiones autenticadas como `DIRECTOR` responden `201 Created` / `200 OK`; peticiones realizadas por `DOCENTE` o `ALUMNO` son bloqueadas con `403 Forbidden` (`UsuarioControllerTest#crearUsuario_SinRolDirector_Retorna403`); `check.sh` pasa en verde.
 
-- [] **PASS-16: Desarrollar DTOs, Servicio y Controlador para Grupos e Inscripciones**
+- [x] **PASS-16: Desarrollar DTOs, Servicio y Controlador para Grupos e Inscripciones**
   - *Descripción:* Crear los DTOs `GrupoCreateRecord`, `GrupoResponseRecord` e `InscripcionCreateRecord`. Desarrollar `GrupoService` (validando existencia del docente titular y unicidad de clave de grupo) y `GrupoController` protegido con `@PreAuthorize("hasRole('DIRECTOR')")`, manteniendo el flujo estricto Controller -> Service -> Repository.
   - *Criterio de Aceptación:* Impide asociar docentes inactivos o inexistentes (`400 Bad Request`); peticiones de usuarios sin rol `DIRECTOR` devuelven `403 Forbidden`; pruebas de integración con `MockMvc` pasan en verde.
 
-- [] **PASS-17: Desarrollar módulo de administración de usuarios en src/features/usuarios/**
+- [x] **PASS-17: Desarrollar módulo de administración de usuarios en src/features/usuarios/**
   - *Descripción:* Construir en `src/features/usuarios/` el componente inteligente `UsuariosAdminContainer.jsx` (estado local, consumo de API vía Axios, filtrado por rol y modal de confirmación) y los componentes tontos `TablaUsuarios.jsx` y `ModalUsuarioForm.jsx` (encargados puramente de la presentación y emisión de eventos mediante props).
   - *Criterio de Aceptación:* El Director puede crear, filtrar y dar de baja lógica a docentes y alumnos; validación en formulario cliente antes del envío; rutas protegidas redirigen fuera del módulo a usuarios con roles no autorizados.
 
-- [] **PASS-18: Desarrollar módulo de gestión de grupos e inscripciones en src/features/grupos/**
+- [x] **PASS-18: Desarrollar módulo de gestión de grupos e inscripciones en src/features/grupos/**
   - *Descripción:* Construir en `src/features/grupos/` el componente contenedor `GruposContainer.jsx` (gestión de asignación de docentes titulares e inscripción de alumnos en grupos) y los componentes presentacionales `ListaGruposCard.jsx` y `AsignarAlumnoModal.jsx` desacoplados de llamadas a la red.
   - *Criterio de Aceptación:* Permite crear grupos y matricular alumnos visualizando la lista actualizada en tiempo real; validación visual de formularios; `npm run lint` y `npm run build` pasan sin incidencias.
 
