@@ -100,7 +100,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear los Java Records en `dto/asistencia/`: `PaseListaItemRecord` (`alumnoId`, `estado`), `RegistroAsistenciaBulkRecord` (`fecha`, `List<PaseListaItemRecord> lista`), `AsistenciaResponseRecord` y `ResumenAsistenciaAlumnoRecord` (porcentajes, total de faltas, retardos y justificados).
   - *Criterio de Aceptación:* Los Java Records garantizan inmutabilidad absoluta; validan restricciones `@NotNull` en sus campos; ninguna entidad `@Entity` de persistencia es expuesta en estos contratos.
 
-- [] **PASS-20: Implementar AsistenciaService con validación de titularidad (Ownership) y fecha actual**
+- [x] **PASS-20: Implementar AsistenciaService con validación de titularidad (Ownership) y fecha actual**
   - *Descripción:* Desarrollar en `AsistenciaService` la lógica de pase de lista bajo `@Transactional`: verificar que el docente autenticado sea el titular asignado al grupo en la base de datos (validación de Ownership), validar que `fecha.equals(LocalDate.now())` (`D-05`), y comprobar que no exista pase previo en la fecha actual (lanzando `409 Conflict` si ya existe).
   - *Criterio de Aceptación:* Retorna `403 Forbidden` si un docente intenta pasar lista en un grupo ajeno (`H-02`); retorna `400 Bad Request` si la fecha difiere del día en curso; retorna `409 Conflict` ante duplicidad; rollback atómico total ante fallo (`NFR-02`).
 
