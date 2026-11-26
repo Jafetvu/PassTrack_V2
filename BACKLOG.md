@@ -108,7 +108,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear los endpoints REST en `AsistenciaController`: `POST /api/asistencias/grupo/{id}` con `@PreAuthorize("hasRole('DOCENTE')")`, `GET /api/asistencias/grupo/{id}/hoy`, y `GET /api/asistencias/mis-asistencias` con `@PreAuthorize("hasRole('ALUMNO')")` asegurando que el servicio filtre estrictamente por el `userId` autenticado.
   - *Criterio de Aceptación:* Pruebas unitarias en `AsistenciaControllerTest`: docente titular registra asistencia obteniendo `201 Created` en menos de 500 ms; docente no titular recibe `403 Forbidden`; alumno obtiene solo sus registros propios; `check.sh` pasa en verde.
 
-- [] **PASS-22: Desarrollar módulo de Pase de Lista docente en src/features/asistencias/**
+- [x] **PASS-22: Desarrollar módulo de Pase de Lista docente en src/features/asistencias/**
   - *Descripción:* Implementar en `src/features/asistencias/` el componente contenedor `PaseListaContainer.jsx` (obtiene la nómina del grupo, preselecciona a todos los alumnos en `PRESENTE` según `P-01`, gestiona estado de guardado) y el componente presentacional `TablaPaseLista.jsx` con botones de alternancia rápida a `FALTA` o `RETARDO`.
   - *Criterio de Aceptación:* El docente completa el pase de lista de su grupo en un máximo de 3 clics; los alumnos aparecen inicialmente en `PRESENTE`; deshabilita la edición si el pase del día ya fue registrado; notificaciones de éxito y error accesibles.
 
