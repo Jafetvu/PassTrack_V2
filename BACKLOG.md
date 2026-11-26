@@ -56,7 +56,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Definir los DTOs inmutables `LoginRequestRecord` y `AuthResponseRecord` con Java Records en `dto/auth/`. En `AuthService`, validar credenciales con `AuthenticationManager` y `BCryptPasswordEncoder`. En `AuthController` (`@RestController`), exponer `POST /api/auth/login` respetando el flujo estricto Multicapa (Controller invoca Service).
   - *Criterio de Aceptación:* Petición con credenciales correctas retorna `200 OK` con JWT y rol del usuario sin exponer `passwordHash`; credenciales incorrectas devuelven `401 Unauthorized`; pruebas unitarias con `MockMvc` pasan en verde.
 
-- [] **PASS-11: Configurar cliente HTTP Axios con Interceptor Pattern en Frontend**
+- [x] **PASS-11: Configurar cliente HTTP Axios con Interceptor Pattern en Frontend**
   - *Descripción:* Crear la instancia centralizada en `PassTrack_frontend/src/api/axiosClient.js`, implementando un interceptor de solicitud para adjuntar automáticamente el encabezado `Authorization: Bearer <token>` y un interceptor de respuesta para interceptar errores `401` y `403`, limpiando el estado de sesión y redirigiendo a la ruta `/login`.
   - *Criterio de Aceptación:* Toda petición HTTP originada en la aplicación incluye el token JWT activo; ante una respuesta `401`, la sesión local se purga y el navegador navega a `/login` sin generar excepciones no capturadas.
 
