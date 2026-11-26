@@ -36,7 +36,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Diseñar el script SQL en `PassTrack_backend/src/main/resources/schema.sql` (y montaje para `db` en `/docker-entrypoint-initdb.d/init.sql`) con las tablas `usuario`, `grupo`, `inscripcion`, `asistencia` y `justificante`, definiendo índices, llaves foráneas y la restricción `UNIQUE (alumno_id, grupo_id, fecha)`.
   - *Criterio de Aceptación:* El script se ejecuta limpiamente en MySQL 8.0, impide duplicados de asistencias concurrentes a nivel de motor relacional (`M-01`) y maneja marcas de tiempo en formato UTC (`M-02`).
 
-- [] **PASS-07: Implementar entidades JPA en la capa Modelo (model/)**
+- [x] **PASS-07: Implementar entidades JPA en la capa Modelo (model/)**
   - *Descripción:* Crear las clases `@Entity` en el paquete `com.passtrack.api.model` (`Usuario`, `Grupo`, `Inscripcion`, `Asistencia`, `Justificante`), definiendo relaciones `@ManyToOne`, `@OneToMany`, `@OneToOne`, enumeraciones (`Rol`, `EstadoAsistencia`, `EstadoJustificante`) y el atributo booleano `activo` para borrado lógico (`M-03`).
   - *Criterio de Aceptación:* El mapeo ORM es validado mediante pruebas de persistencia; el campo `passwordHash` no se expone en serializaciones; la suite de `check.sh` compila sin advertencias de Hibernate.
 
