@@ -15,4 +15,6 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
     Optional<Inscripcion> findByAlumnoIdAndGrupoId(Long alumnoId, Long grupoId);
 
     boolean existsByAlumnoIdAndGrupoId(Long alumnoId, Long grupoId);
+
+    long countByGrupoId(Long grupoId);
 }
