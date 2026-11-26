@@ -72,7 +72,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 4: Fase 1 - Gestión de Usuarios y Grupos
 
-- [] **PASS-14: Implementar DTOs inmutables (Java Records) y Servicio de Usuarios con cifrado BCrypt**
+- [x] **PASS-14: Implementar DTOs inmutables (Java Records) y Servicio de Usuarios con cifrado BCrypt**
   - *Descripción:* Crear los DTOs `UsuarioCreateRecord`, `UsuarioResponseRecord` y `UsuarioUpdateRecord` en `dto/usuario/`. En `UsuarioService`, implementar la lógica de negocio para crear usuarios cifrando contraseñas con `BCryptPasswordEncoder`, listar usuarios activos con paginación y realizar borrado lógico cambiando el flag `activo` a `false`.
   - *Criterio de Aceptación:* Ningún DTO expone `passwordHash`; intentos de registro con email duplicado lanzan excepción de conflicto (`409 Conflict`); el borrado lógico no borra registros físicamente (`M-03`); pruebas unitarias en `UsuarioServiceTest` en verde.
 
