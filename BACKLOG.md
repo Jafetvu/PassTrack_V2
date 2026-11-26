@@ -60,7 +60,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear la instancia centralizada en `PassTrack_frontend/src/api/axiosClient.js`, implementando un interceptor de solicitud para adjuntar automáticamente el encabezado `Authorization: Bearer <token>` y un interceptor de respuesta para interceptar errores `401` y `403`, limpiando el estado de sesión y redirigiendo a la ruta `/login`.
   - *Criterio de Aceptación:* Toda petición HTTP originada en la aplicación incluye el token JWT activo; ante una respuesta `401`, la sesión local se purga y el navegador navega a `/login` sin generar excepciones no capturadas.
 
-- [] **PASS-12: Implementar estado global de autenticación con Provider Pattern (AuthContext) en Frontend**
+- [x] **PASS-12: Implementar estado global de autenticación con Provider Pattern (AuthContext) en Frontend**
   - *Descripción:* Crear `src/context/AuthContext.jsx` y su hook personalizado `useAuth`, proveyendo de manera reactiva el usuario autenticado, token, rol y métodos `login` / `logout`. Decodificar los claims del token en el montaje inicial para rehidratar la sesión de forma transparente.
   - *Criterio de Aceptación:* El estado de sesión se propaga a los componentes sin *prop drilling*; el estado persiste ante recargas del navegador; `logout` destruye el token en almacenamiento local y restablece el contexto a valores nulos.
 
