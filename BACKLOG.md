@@ -120,7 +120,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 6: Fase 3 - Gestión de Justificantes y Storage
 
-- [] **PASS-24: Implementar servicio de almacenamiento de comprobantes en volumen Docker**
+- [x] **PASS-24: Implementar servicio de almacenamiento de comprobantes en volumen Docker**
   - *Descripción:* Crear `FileStorageService` para almacenar evidencias en el volumen persistente `/app/uploads` (`I-01` / `D-06`). Validar que los archivos no superen `2 MB` y cumplan tipos MIME permitidos (`application/pdf`, `image/jpeg`, `image/png`). Retornar ruta segura con identificador UUID único.
   - *Criterio de Aceptación:* Archivos que excedan 2 MB o con formato inválido son rechazados con `400 Bad Request`; pruebas unitarias con mock de almacenamiento (`@MockBean`) aseguran ejecución exitosa y aislada en el entorno de Jenkins.
 
