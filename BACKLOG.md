@@ -124,7 +124,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear `FileStorageService` para almacenar evidencias en el volumen persistente `/app/uploads` (`I-01` / `D-06`). Validar que los archivos no superen `2 MB` y cumplan tipos MIME permitidos (`application/pdf`, `image/jpeg`, `image/png`). Retornar ruta segura con identificador UUID único.
   - *Criterio de Aceptación:* Archivos que excedan 2 MB o con formato inválido son rechazados con `400 Bad Request`; pruebas unitarias con mock de almacenamiento (`@MockBean`) aseguran ejecución exitosa y aislada en el entorno de Jenkins.
 
-- [] **PASS-25: Implementar DTOs inmutables y Servicio de Justificantes con validación de propiedad**
+- [x] **PASS-25: Implementar DTOs inmutables y Servicio de Justificantes con validación de propiedad**
   - *Descripción:* Crear los DTOs `JustificanteCreateRecord` (`asistenciaId`, `motivo`), `JustificanteResolucionRecord` (`estado`, `comentarioResolucion`) y `JustificanteResponseRecord`. En `JustificanteService`, verificar que la asistencia pertenezca al alumno autenticado (`Ownership`) y que no exista un justificante previo vinculado (`asistencia_id UNIQUE`).
   - *Criterio de Aceptación:* Intentar solicitar justificante para una falta ajena retorna `403 Forbidden` (`H-03`); registrar más de un justificante para la misma falta retorna `409 Conflict` (`P-02`); la solicitud se inicializa en estado `PENDIENTE`.
 
