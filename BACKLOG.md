@@ -112,7 +112,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Implementar en `src/features/asistencias/` el componente contenedor `PaseListaContainer.jsx` (obtiene la nómina del grupo, preselecciona a todos los alumnos en `PRESENTE` según `P-01`, gestiona estado de guardado) y el componente presentacional `TablaPaseLista.jsx` con botones de alternancia rápida a `FALTA` o `RETARDO`.
   - *Criterio de Aceptación:* El docente completa el pase de lista de su grupo en un máximo de 3 clics; los alumnos aparecen inicialmente en `PRESENTE`; deshabilita la edición si el pase del día ya fue registrado; notificaciones de éxito y error accesibles.
 
-- [] **PASS-23: Desarrollar módulo de consulta de asistencias para Alumnos en src/features/asistencias/**
+- [x] **PASS-23: Desarrollar módulo de consulta de asistencias para Alumnos en src/features/asistencias/**
   - *Descripción:* Implementar en `src/features/asistencias/` el contenedor `MisAsistenciasContainer.jsx` (consumo de `GET /api/asistencias/mis-asistencias` con Axios) y los componentes presentacionales `ResumenPorcentajeCard.jsx` e `HistorialAsistenciasTable.jsx`, mostrando porcentaje global por materia y botón condicional "Solicitar Justificante" en registros con falta.
   - *Criterio de Aceptación:* El alumno visualiza su desglose con semáforo de colores; el botón "Solicitar Justificante" solo se visualiza activo en registros con estado `FALTA` o `RETARDO` que no cuenten con solicitud previa (`P-02`).
 
