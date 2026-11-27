@@ -120,27 +120,27 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 6: Fase 3 - Gestión de Justificantes y Storage
 
-- [] **PASS-24: Implementar servicio de almacenamiento de comprobantes en volumen Docker**
+- [x] **PASS-24: Implementar servicio de almacenamiento de comprobantes en volumen Docker**
   - *Descripción:* Crear `FileStorageService` para almacenar evidencias en el volumen persistente `/app/uploads` (`I-01` / `D-06`). Validar que los archivos no superen `2 MB` y cumplan tipos MIME permitidos (`application/pdf`, `image/jpeg`, `image/png`). Retornar ruta segura con identificador UUID único.
   - *Criterio de Aceptación:* Archivos que excedan 2 MB o con formato inválido son rechazados con `400 Bad Request`; pruebas unitarias con mock de almacenamiento (`@MockBean`) aseguran ejecución exitosa y aislada en el entorno de Jenkins.
 
-- [] **PASS-25: Implementar DTOs inmutables y Servicio de Justificantes con validación de propiedad**
+- [x] **PASS-25: Implementar DTOs inmutables y Servicio de Justificantes con validación de propiedad**
   - *Descripción:* Crear los DTOs `JustificanteCreateRecord` (`asistenciaId`, `motivo`), `JustificanteResolucionRecord` (`estado`, `comentarioResolucion`) y `JustificanteResponseRecord`. En `JustificanteService`, verificar que la asistencia pertenezca al alumno autenticado (`Ownership`) y que no exista un justificante previo vinculado (`asistencia_id UNIQUE`).
   - *Criterio de Aceptación:* Intentar solicitar justificante para una falta ajena retorna `403 Forbidden` (`H-03`); registrar más de un justificante para la misma falta retorna `409 Conflict` (`P-02`); la solicitud se inicializa en estado `PENDIENTE`.
 
-- [] **PASS-26: Implementar dictamen de justificantes con mutación atómica transaccional de asistencia**
+- [x] **PASS-26: Implementar dictamen de justificantes con mutación atómica transaccional de asistencia**
   - *Descripción:* Implementar en `JustificanteService.resolverJustificante` la lógica bajo `@Transactional`: actualizar el justificante a `APROBADO` o `RECHAZADO` con el comentario del Director; ante aprobación, mutar automáticamente el estado de la entidad `Asistencia` vinculada a `JUSTIFICADO` dentro de la misma transacción relacional (`P-03`).
   - *Criterio de Aceptación:* Al aprobar el justificante, la asistencia vinculada actualiza su estado a `JUSTIFICADO` en MySQL; ante cualquier fallo imprevisto, se realiza un rollback integral de ambas entidades; prueba `JustificanteServiceTest#resolverJustificante_Aprobado_CambiaAsistenciaAJustificado` en verde.
 
-- [] **PASS-27: Implementar JustificanteController para Alumnos y Director con control RBAC**
+- [x] **PASS-27: Implementar JustificanteController para Alumnos y Director con control RBAC**
   - *Descripción:* Exponer endpoints REST en `JustificanteController`: `POST /api/justificantes` multipart protegido con `@PreAuthorize("hasRole('ALUMNO')")`, `GET /api/justificantes/pendientes` con `@PreAuthorize("hasRole('DIRECTOR')")`, `PATCH /api/justificantes/{id}/estado` con `@PreAuthorize("hasRole('DIRECTOR')")`, y descarga de evidencia autorizada.
   - *Criterio de Aceptación:* Docentes y alumnos reciben `403 Forbidden` al invocar `PATCH /api/justificantes/{id}/estado` (`H-04`); el Director aprueba justificantes y recibe `200 OK`; pruebas con `MockMvc` pasan en verde.
 
-- [] **PASS-28: Desarrollar módulo de solicitud de justificante en src/features/justificantes/**
+- [x] **PASS-28: Desarrollar módulo de solicitud de justificante en src/features/justificantes/**
   - *Descripción:* Construir en `src/features/justificantes/` el componente inteligente `SolicitarJustificanteContainer.jsx` (gestión de `FormData`, validación en cliente de tamaño y formato de archivo, llamada a API) y el componente presentacional `SolicitudJustificanteModal.jsx` con formulario de motivo y selector de archivo.
   - *Criterio de Aceptación:* El formulario valida archivo y motivo antes de enviar; muestra indicador visual de carga durante la transferencia; al completarse con éxito, refresca la tabla de asistencias y cierra el modal sin errores.
 
-- [] **PASS-29: Desarrollar módulo de dictamen de justificantes para el Director en src/features/justificantes/**
+- [x] **PASS-29: Desarrollar módulo de dictamen de justificantes para el Director en src/features/justificantes/**
   - *Descripción:* Construir en `src/features/justificantes/` el componente inteligente `BandejaJustificantesContainer.jsx` (carga de solicitudes pendientes, ejecución de dictamen con comentario obligatorio) y los componentes tontos `TablaJustificantesPendientes.jsx` y `VisorEvidenciaModal.jsx` (previsualización de archivo y captura de resolución).
   - *Criterio de Aceptación:* El Director previsualiza la evidencia (PDF o imagen); el dictamen requiere comentario de resolución antes de habilitar el botón; al resolverse, el registro se remueve de la bandeja en tiempo real; `npm run lint` pasa en verde.
 
