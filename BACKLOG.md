@@ -136,7 +136,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Exponer endpoints REST en `JustificanteController`: `POST /api/justificantes` multipart protegido con `@PreAuthorize("hasRole('ALUMNO')")`, `GET /api/justificantes/pendientes` con `@PreAuthorize("hasRole('DIRECTOR')")`, `PATCH /api/justificantes/{id}/estado` con `@PreAuthorize("hasRole('DIRECTOR')")`, y descarga de evidencia autorizada.
   - *Criterio de Aceptación:* Docentes y alumnos reciben `403 Forbidden` al invocar `PATCH /api/justificantes/{id}/estado` (`H-04`); el Director aprueba justificantes y recibe `200 OK`; pruebas con `MockMvc` pasan en verde.
 
-- [] **PASS-28: Desarrollar módulo de solicitud de justificante en src/features/justificantes/**
+- [x] **PASS-28: Desarrollar módulo de solicitud de justificante en src/features/justificantes/**
   - *Descripción:* Construir en `src/features/justificantes/` el componente inteligente `SolicitarJustificanteContainer.jsx` (gestión de `FormData`, validación en cliente de tamaño y formato de archivo, llamada a API) y el componente presentacional `SolicitudJustificanteModal.jsx` con formulario de motivo y selector de archivo.
   - *Criterio de Aceptación:* El formulario valida archivo y motivo antes de enviar; muestra indicador visual de carga durante la transferencia; al completarse con éxito, refresca la tabla de asistencias y cierra el modal sin errores.
 
