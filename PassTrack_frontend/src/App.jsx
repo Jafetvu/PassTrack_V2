@@ -2,9 +2,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AppShellLayout from './components/AppShellLayout';
 import DirectorLayout from './components/DirectorLayout';
 import ProtectedRoute from './components/ProtectedRoute';
-import RoleDashboardPlaceholder from './components/RoleDashboardPlaceholder';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { getHomeRouteByRole } from './context/roleRoutes';
+import MisAsistenciasContainer from './features/asistencias/MisAsistenciasContainer';
 import PaseListaContainer from './features/asistencias/PaseListaContainer';
 import LoginContainer from './features/auth/LoginContainer';
 import GruposContainer from './features/grupos/GruposContainer';
@@ -47,10 +47,9 @@ export default function App() {
             path="/alumno/*"
             element={
               <ProtectedRoute allowedRoles={['ALUMNO']}>
-                <RoleDashboardPlaceholder
-                  title="Portal del Alumno"
-                  subtitle="Historial de asistencias y solicitud de justificantes."
-                />
+                <AppShellLayout>
+                  <MisAsistenciasContainer />
+                </AppShellLayout>
               </ProtectedRoute>
             }
           />
