@@ -8,6 +8,7 @@ import MisAsistenciasContainer from './features/asistencias/MisAsistenciasContai
 import PaseListaContainer from './features/asistencias/PaseListaContainer';
 import LoginContainer from './features/auth/LoginContainer';
 import GruposContainer from './features/grupos/GruposContainer';
+import BandejaJustificantesContainer from './features/justificantes/BandejaJustificantesContainer';
 import SolicitarJustificanteContainer from './features/justificantes/SolicitarJustificanteContainer';
 import UsuariosAdminContainer from './features/usuarios/UsuariosAdminContainer';
 
@@ -33,6 +34,7 @@ export default function App() {
             <Route index element={<Navigate to="/director/usuarios" replace />} />
             <Route path="usuarios" element={<UsuariosAdminContainer />} />
             <Route path="grupos" element={<GruposContainer />} />
+            <Route path="justificantes" element={<BandejaJustificantesContainer />} />
           </Route>
           <Route
             path="/docente/*"
