@@ -1,4 +1,4 @@
-import { BookOpen, LogOut, ShieldCheck, Users } from 'lucide-react';
+import { BookOpen, FileCheck2, LogOut, ShieldCheck, Users } from 'lucide-react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -39,6 +39,10 @@ export default function DirectorLayout() {
               <NavLink to="/director/grupos" className={navClass}>
                 <BookOpen className="w-4 h-4" aria-hidden="true" />
                 Grupos
+              </NavLink>
+              <NavLink to="/director/justificantes" className={navClass}>
+                <FileCheck2 className="w-4 h-4" aria-hidden="true" />
+                Justificantes
               </NavLink>
             </nav>
           </div>

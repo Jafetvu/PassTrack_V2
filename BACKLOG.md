@@ -140,7 +140,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Construir en `src/features/justificantes/` el componente inteligente `SolicitarJustificanteContainer.jsx` (gestión de `FormData`, validación en cliente de tamaño y formato de archivo, llamada a API) y el componente presentacional `SolicitudJustificanteModal.jsx` con formulario de motivo y selector de archivo.
   - *Criterio de Aceptación:* El formulario valida archivo y motivo antes de enviar; muestra indicador visual de carga durante la transferencia; al completarse con éxito, refresca la tabla de asistencias y cierra el modal sin errores.
 
-- [] **PASS-29: Desarrollar módulo de dictamen de justificantes para el Director en src/features/justificantes/**
+- [x] **PASS-29: Desarrollar módulo de dictamen de justificantes para el Director en src/features/justificantes/**
   - *Descripción:* Construir en `src/features/justificantes/` el componente inteligente `BandejaJustificantesContainer.jsx` (carga de solicitudes pendientes, ejecución de dictamen con comentario obligatorio) y los componentes tontos `TablaJustificantesPendientes.jsx` y `VisorEvidenciaModal.jsx` (previsualización de archivo y captura de resolución).
   - *Criterio de Aceptación:* El Director previsualiza la evidencia (PDF o imagen); el dictamen requiere comentario de resolución antes de habilitar el botón; al resolverse, el registro se remueve de la bandeja en tiempo real; `npm run lint` pasa en verde.
 
