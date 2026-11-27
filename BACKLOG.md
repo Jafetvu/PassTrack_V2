@@ -96,23 +96,23 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
 
 ## Épica 5: Fase 2 - Operación de Pase de Lista
 
-- [] **PASS-19: Implementar DTOs inmutables para pase de lista y resúmenes de asistencia**
+- [x] **PASS-19: Implementar DTOs inmutables para pase de lista y resúmenes de asistencia**
   - *Descripción:* Crear los Java Records en `dto/asistencia/`: `PaseListaItemRecord` (`alumnoId`, `estado`), `RegistroAsistenciaBulkRecord` (`fecha`, `List<PaseListaItemRecord> lista`), `AsistenciaResponseRecord` y `ResumenAsistenciaAlumnoRecord` (porcentajes, total de faltas, retardos y justificados).
   - *Criterio de Aceptación:* Los Java Records garantizan inmutabilidad absoluta; validan restricciones `@NotNull` en sus campos; ninguna entidad `@Entity` de persistencia es expuesta en estos contratos.
 
-- [] **PASS-20: Implementar AsistenciaService con validación de titularidad (Ownership) y fecha actual**
+- [x] **PASS-20: Implementar AsistenciaService con validación de titularidad (Ownership) y fecha actual**
   - *Descripción:* Desarrollar en `AsistenciaService` la lógica de pase de lista bajo `@Transactional`: verificar que el docente autenticado sea el titular asignado al grupo en la base de datos (validación de Ownership), validar que `fecha.equals(LocalDate.now())` (`D-05`), y comprobar que no exista pase previo en la fecha actual (lanzando `409 Conflict` si ya existe).
   - *Criterio de Aceptación:* Retorna `403 Forbidden` si un docente intenta pasar lista en un grupo ajeno (`H-02`); retorna `400 Bad Request` si la fecha difiere del día en curso; retorna `409 Conflict` ante duplicidad; rollback atómico total ante fallo (`NFR-02`).
 
-- [] **PASS-21: Implementar AsistenciaController para registro docente y consulta por alumno**
+- [x] **PASS-21: Implementar AsistenciaController para registro docente y consulta por alumno**
   - *Descripción:* Crear los endpoints REST en `AsistenciaController`: `POST /api/asistencias/grupo/{id}` con `@PreAuthorize("hasRole('DOCENTE')")`, `GET /api/asistencias/grupo/{id}/hoy`, y `GET /api/asistencias/mis-asistencias` con `@PreAuthorize("hasRole('ALUMNO')")` asegurando que el servicio filtre estrictamente por el `userId` autenticado.
   - *Criterio de Aceptación:* Pruebas unitarias en `AsistenciaControllerTest`: docente titular registra asistencia obteniendo `201 Created` en menos de 500 ms; docente no titular recibe `403 Forbidden`; alumno obtiene solo sus registros propios; `check.sh` pasa en verde.
 
-- [] **PASS-22: Desarrollar módulo de Pase de Lista docente en src/features/asistencias/**
+- [x] **PASS-22: Desarrollar módulo de Pase de Lista docente en src/features/asistencias/**
   - *Descripción:* Implementar en `src/features/asistencias/` el componente contenedor `PaseListaContainer.jsx` (obtiene la nómina del grupo, preselecciona a todos los alumnos en `PRESENTE` según `P-01`, gestiona estado de guardado) y el componente presentacional `TablaPaseLista.jsx` con botones de alternancia rápida a `FALTA` o `RETARDO`.
   - *Criterio de Aceptación:* El docente completa el pase de lista de su grupo en un máximo de 3 clics; los alumnos aparecen inicialmente en `PRESENTE`; deshabilita la edición si el pase del día ya fue registrado; notificaciones de éxito y error accesibles.
 
-- [] **PASS-23: Desarrollar módulo de consulta de asistencias para Alumnos en src/features/asistencias/**
+- [x] **PASS-23: Desarrollar módulo de consulta de asistencias para Alumnos en src/features/asistencias/**
   - *Descripción:* Implementar en `src/features/asistencias/` el contenedor `MisAsistenciasContainer.jsx` (consumo de `GET /api/asistencias/mis-asistencias` con Axios) y los componentes presentacionales `ResumenPorcentajeCard.jsx` e `HistorialAsistenciasTable.jsx`, mostrando porcentaje global por materia y botón condicional "Solicitar Justificante" en registros con falta.
   - *Criterio de Aceptación:* El alumno visualiza su desglose con semáforo de colores; el botón "Solicitar Justificante" solo se visualiza activo en registros con estado `FALTA` o `RETARDO` que no cuenten con solicitud previa (`P-02`).
 
