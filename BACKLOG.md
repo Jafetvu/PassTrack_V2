@@ -128,7 +128,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Crear los DTOs `JustificanteCreateRecord` (`asistenciaId`, `motivo`), `JustificanteResolucionRecord` (`estado`, `comentarioResolucion`) y `JustificanteResponseRecord`. En `JustificanteService`, verificar que la asistencia pertenezca al alumno autenticado (`Ownership`) y que no exista un justificante previo vinculado (`asistencia_id UNIQUE`).
   - *Criterio de Aceptación:* Intentar solicitar justificante para una falta ajena retorna `403 Forbidden` (`H-03`); registrar más de un justificante para la misma falta retorna `409 Conflict` (`P-02`); la solicitud se inicializa en estado `PENDIENTE`.
 
-- [] **PASS-26: Implementar dictamen de justificantes con mutación atómica transaccional de asistencia**
+- [x] **PASS-26: Implementar dictamen de justificantes con mutación atómica transaccional de asistencia**
   - *Descripción:* Implementar en `JustificanteService.resolverJustificante` la lógica bajo `@Transactional`: actualizar el justificante a `APROBADO` o `RECHAZADO` con el comentario del Director; ante aprobación, mutar automáticamente el estado de la entidad `Asistencia` vinculada a `JUSTIFICADO` dentro de la misma transacción relacional (`P-03`).
   - *Criterio de Aceptación:* Al aprobar el justificante, la asistencia vinculada actualiza su estado a `JUSTIFICADO` en MySQL; ante cualquier fallo imprevisto, se realiza un rollback integral de ambas entidades; prueba `JustificanteServiceTest#resolverJustificante_Aprobado_CambiaAsistenciaAJustificado` en verde.
 

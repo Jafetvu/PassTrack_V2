@@ -1,6 +1,7 @@
 package com.passtrack.api.service;
 
 import com.passtrack.api.dto.justificante.JustificanteCreateRecord;
+import com.passtrack.api.dto.justificante.JustificanteResolucionRecord;
 import com.passtrack.api.dto.justificante.JustificanteResponseRecord;
 import com.passtrack.api.exception.BadRequestException;
 import com.passtrack.api.exception.DuplicateResourceException;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -69,6 +71,35 @@ public class JustificanteService {
             .build();
 
         return JustificanteResponseRecord.fromEntity(justificanteRepository.save(nuevo));
+    }
+
+    @Transactional
+    public JustificanteResponseRecord resolverJustificante(
+            Long justificanteId,
+            JustificanteResolucionRecord payload) {
+        Justificante justificante = justificanteRepository.findById(justificanteId)
+            .orElseThrow(() -> new ResourceNotFoundException("Justificante no encontrado con ID: " + justificanteId));
+
+        if (justificante.getEstado() != EstadoJustificante.PENDIENTE) {
+            throw new DuplicateResourceException("El justificante ya fue dictaminado anteriormente");
+        }
+
+        if (payload.estado() != EstadoJustificante.APROBADO
+                && payload.estado() != EstadoJustificante.RECHAZADO) {
+            throw new BadRequestException("El dictamen debe ser APROBADO o RECHAZADO");
+        }
+
+        justificante.setEstado(payload.estado());
+        justificante.setComentarioResolucion(payload.comentarioResolucion().trim());
+        justificante.setResolvedAt(Instant.now());
+
+        if (payload.estado() == EstadoJustificante.APROBADO) {
+            Asistencia asistencia = justificante.getAsistencia();
+            asistencia.setEstado(EstadoAsistencia.JUSTIFICADO);
+            asistenciaRepository.save(asistencia);
+        }
+
+        return JustificanteResponseRecord.fromEntity(justificanteRepository.save(justificante));
     }
 
     @Transactional(readOnly = true)
