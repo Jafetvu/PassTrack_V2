@@ -8,6 +8,7 @@ import MisAsistenciasContainer from './features/asistencias/MisAsistenciasContai
 import PaseListaContainer from './features/asistencias/PaseListaContainer';
 import LoginContainer from './features/auth/LoginContainer';
 import GruposContainer from './features/grupos/GruposContainer';
+import SolicitarJustificanteContainer from './features/justificantes/SolicitarJustificanteContainer';
 import UsuariosAdminContainer from './features/usuarios/UsuariosAdminContainer';
 
 function RootRedirect() {
@@ -48,7 +49,11 @@ export default function App() {
             element={
               <ProtectedRoute allowedRoles={['ALUMNO']}>
                 <AppShellLayout>
-                  <MisAsistenciasContainer />
+                  <MisAsistenciasContainer
+                    renderJustificanteModal={(modalProps) => (
+                      <SolicitarJustificanteContainer {...modalProps} />
+                    )}
+                  />
                 </AppShellLayout>
               </ProtectedRoute>
             }
