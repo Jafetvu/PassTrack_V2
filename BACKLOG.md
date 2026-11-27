@@ -132,7 +132,7 @@ Las tareas están organizadas con casillas interactivas (`- [ ]`) listas para se
   - *Descripción:* Implementar en `JustificanteService.resolverJustificante` la lógica bajo `@Transactional`: actualizar el justificante a `APROBADO` o `RECHAZADO` con el comentario del Director; ante aprobación, mutar automáticamente el estado de la entidad `Asistencia` vinculada a `JUSTIFICADO` dentro de la misma transacción relacional (`P-03`).
   - *Criterio de Aceptación:* Al aprobar el justificante, la asistencia vinculada actualiza su estado a `JUSTIFICADO` en MySQL; ante cualquier fallo imprevisto, se realiza un rollback integral de ambas entidades; prueba `JustificanteServiceTest#resolverJustificante_Aprobado_CambiaAsistenciaAJustificado` en verde.
 
-- [] **PASS-27: Implementar JustificanteController para Alumnos y Director con control RBAC**
+- [x] **PASS-27: Implementar JustificanteController para Alumnos y Director con control RBAC**
   - *Descripción:* Exponer endpoints REST en `JustificanteController`: `POST /api/justificantes` multipart protegido con `@PreAuthorize("hasRole('ALUMNO')")`, `GET /api/justificantes/pendientes` con `@PreAuthorize("hasRole('DIRECTOR')")`, `PATCH /api/justificantes/{id}/estado` con `@PreAuthorize("hasRole('DIRECTOR')")`, y descarga de evidencia autorizada.
   - *Criterio de Aceptación:* Docentes y alumnos reciben `403 Forbidden` al invocar `PATCH /api/justificantes/{id}/estado` (`H-04`); el Director aprueba justificantes y recibe `200 OK`; pruebas con `MockMvc` pasan en verde.
 
